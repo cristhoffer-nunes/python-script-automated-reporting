@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
+import os, glob 
 
 import painel_infos
 import create_report
@@ -26,7 +27,15 @@ options.add_experimental_option("prefs", prefs)
 
 options.headless = True
 
+def delete_arqs():
+    for filename in glob.glob(os.path.dirname(os.path.abspath(__file__)) + "/images/img*"):
+        if os.path.isfile(filename):
+            os.remove(filename)
 
+    if os.path.isfile("Relatório.pdf"):
+        os.remove("Relatório.pdf")
+
+# CREDENCIAIS PARA ACESSO AO PAINEL PARA SCREENSHOT (NAO SUBSTITUIR AS CREDENCIAIS)
 EMAIL = "cristhoffer.santos@jbq.global"
 PASSWORD = "AaSsDdFf@135"
 URL = "https://portal.azure.com/#@jbq.global/dashboard/private/b45f67ab-aa45-4b80-bfb9-014009bfe23e"
@@ -58,7 +67,7 @@ def main():
     login()
 
     print("####			Screenshot		####") 
-    sleep(30) 
+    sleep(60) 
     painel_infos.element_capture(driver)
 
     print("####			Report		####") 
@@ -68,4 +77,7 @@ def main():
     send_email.send_email()
 
     print("####			EXIT		####") 
-    driver.close()
+    
+    delete_arqs()
+    driver.quit()
+    

@@ -8,18 +8,19 @@ ano = dateTimeObj.year
 mes = dateTimeObj.month
 dia = dateTimeObj.day
 
+# CREDENCIAIS DA CONTA QUE IRÁ ENVIAR O E-MAIL (SUBSTITUIR OS DADOS CASO NECESSÁRIO)
 EMAIL = "cristhoffer.santos@jbq.global"
 PASSWD = "AaSsDdFf@135"
 
-
+#LISTA DOS CONTATOS QUE IRÁ RECEBER O E-MAIL (SUBSTITUIR OS DADOS CASO NECESSÁRIO)
 contatos = ['xotakuxpower@gmail.com']
 
 def send_email():
     msg = EmailMessage()
-    msg['Subject'] = f'Relatório Diário - TrendFoods - {dia}/{mes}/{ano}'
+    msg['Subject'] = f'Relatório Diário - Grupo Trigo - {dia}/{mes}/{ano}'
     msg['From'] = EMAIL
     msg['To'] = ', '.join(contatos)
-    msg.set_content('Boa noite, prezados. Segue em anexo o PDF com o relatório diário TrendFoods')
+    msg.set_content('Boa noite, prezados. Segue em anexo o PDF com o relatório diário Grupo Trigo')
 
     with open('Relatório.pdf', 'rb') as f:
         file_data = f.read()
